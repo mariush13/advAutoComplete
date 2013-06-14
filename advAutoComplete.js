@@ -1,3 +1,14 @@
+/*
+ * 
+ * TODO
+ * - complete propositial
+ * - hover style for parent box
+ * - delete items
+ * 
+ * - nice css
+ * 
+ */
+
 function advAutoComplete(element, wordList, params) {
     
    
@@ -16,6 +27,7 @@ function advAutoComplete(element, wordList, params) {
             input.value = '';
         }
         input.onfocus = function () {
+            element.className += ' hover';
             input.onkeydown = function (event) {
                 var char = String.fromCharCode(event.which)
                 if ((event.which == 32 || event.which == 13) && input.value != '' && input.value != ' ') {
@@ -39,15 +51,20 @@ function advAutoComplete(element, wordList, params) {
             }
         }
         input.onblur = function () {
+            element.className = element.className.replace(' hover', '');
             input.onkeydown = null;
             input.onkeyup = null;
         }
         input.form.onsubmit = function () {
             input.value = '';
+            input.style.visibility = 'hidden';
             var boxes = byTag('div', element, true);
             for (i = 0; i < boxes.length; i++) {
                 input.value += boxes.item(i).innerHTML+';';
             }
+        }
+        element.onclick = function () {
+            input.focus();
         }
     }
     

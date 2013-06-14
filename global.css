@@ -1,0 +1,30 @@
+#advAutoCompleteBox div {
+    float: left;
+    margin: 1px;
+    border: 1px #9fadca solid;
+    background: #e3e7f3;
+    padding: 0 5px;
+    height: 20px;
+}
+
+#advAutoCompleteBox {
+    min-height: 24px;
+    width: 200px;
+    padding: 1px 1px 3px 1px;
+    border: 1px #a0a7d1 solid;    
+}
+
+#advAutoCompleteBox.hover {
+    box-shadow: 2px 2px 2px #cee6fe;    
+}
+
+#advAutoCompleteBox input {
+    width: 30px;
+    border: 0;
+    outline: none;
+}
+
+#advAutoCompleteBox input:focus {
+    min-width: 30px;
+    width: auto;   
+}
