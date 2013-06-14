@@ -1,25 +1,3 @@
-function log(value) {
-    console.log(value);
-}
-
-function byId(id) {
-    return document.getElementById(id);
-}
-
-function byTag(tag, node, array) {
-    if (array == null) {
-        array = false;
-    }
-    if (node == null) {
-        node = document;
-    }
-    var ret = node.getElementsByTagName(tag);
-    if (ret.length == 1 && array == false) {
-        return ret.item(0);
-    }
-    return ret;
-}
-
 function advAutoComplete(element, wordList, params) {
     
    
@@ -49,7 +27,8 @@ function advAutoComplete(element, wordList, params) {
             }
         }
         input.onblur = function () {
-            input.onkeypress = null;
+            input.onkeydown = null;
+            input.onkeyup = null;
         }
     }
     
