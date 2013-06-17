@@ -19,8 +19,17 @@ function advAutoComplete(element, wordList, params) {
             for (var i = 0 in items) {
                 if (items[i] != '') {
                     var box = document.createElement('div');
+                    var text = document.createElement('div');
+                    var close = document.createElement('div');
+                    close.className = 'advAutoCompleteClose';
+                    text.className = 'advAutoCompleteText';
+                    close.onclick = function () {
+                        element.removeChild(this.parentNode);
+                    }
+                    text.innerHTML = items[i];
+                    box.appendChild(text);
+                    box.appendChild(close);                    
                     box.className = 'box';
-                    box.innerHTML = items[i];
                     element.insertBefore(box, input);
                 }
             }
@@ -32,8 +41,17 @@ function advAutoComplete(element, wordList, params) {
                 var char = String.fromCharCode(event.which)
                 if ((event.which == 32 || event.which == 13) && input.value != '' && input.value != ' ') {
                     var box = document.createElement('div');
+                    var close = document.createElement('div');
+                    var text = document.createElement('div');
+                    close.className = 'advAutoCompleteClose';
+                    text.className = 'advAutoCompleteText';
+                    close.onclick = function () {
+                        element.removeChild(this.parentNode);
+                    }
+                    text.innerHTML = input.value;
                     box.className = 'box';
-                    box.innerHTML = input.value;
+                    box.appendChild(text);
+                    box.appendChild(close);
                     element.insertBefore(box, input);
                     input.value = '';
                 } else {
@@ -60,7 +78,10 @@ function advAutoComplete(element, wordList, params) {
             input.style.visibility = 'hidden';
             var boxes = byTag('div', element, true);
             for (i = 0; i < boxes.length; i++) {
-                input.value += boxes.item(i).innerHTML+';';
+                if (boxes.item(i).className == 'box') {
+                    input.value += boxes.item(i).childNodes[0].innerHTML+';';
+                    log(boxes.item(i).childNodes[0].innerHTML+';');
+                }
             }
         }
         element.onclick = function () {
@@ -74,5 +95,5 @@ function advAutoComplete(element, wordList, params) {
 }
 
 function onload() {
-    new advAutoComplete(byId('advAutoCompleteBox'))
+    new advAutoComplete(byId('advAutoCompleteBox'));
 }
